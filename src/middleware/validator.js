@@ -1,6 +1,6 @@
 'use strict';
 
-function validateQuery(req, res, next) {
+function validateQuery(req, res) {
     let { name } = req.query;
     if (!name) {
         next('Please enter a name query parameter such as: /person?name=Guy');

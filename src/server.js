@@ -1,6 +1,5 @@
 'use strict';
 
-require('dotenv').config();
 
 const express = require('express');
 const logger = require('./middleware/logger');
@@ -9,11 +8,13 @@ const notFoundHandler = require('./error-handlers/404');
 const serverErrorHandler = require('./error-handlers/500');
 const app = express();
 
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3002;
 
 app.use(logger);
 
-app.get('/person', validateQuery, (req, res, next) => {
+app.get('/person', validateQuery, (req, res) => {
     let { name } = req.query;
     let object = {
         name: name,
