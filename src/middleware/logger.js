@@ -1,6 +1,6 @@
 'use strict';
 
-function logger(req, res, next) {
+function logger(req, res) {
     console.log(`Request: ${req.method}`);
 }
 
