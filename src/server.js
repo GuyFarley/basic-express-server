@@ -4,14 +4,14 @@
 const express = require('express');
 const app = express();
 
-// const logger = require('./middleware/logger');
+const logger = require('./middleware/logger');
 const validateQuery = require('./middleware/validator');
 const notFoundHandler = require('./error-handlers/404');
 const serverErrorHandler = require('./error-handlers/500');
 
 const PORT = process.env.PORT || 3002;
 
-// app.use(logger);
+app.use(logger);
 
 app.get('/person', validateQuery, (req, res) => {
     let { name } = req.query;
@@ -30,6 +30,6 @@ function start() {
 }
 
 module.exports = {
-    server: app,
-    start: start
+    app,
+    start,
 };

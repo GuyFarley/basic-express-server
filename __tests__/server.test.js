@@ -1,8 +1,8 @@
 'use strict';
 
-const { server } = require('../src/server');
+const server = require('../src/server');
 const supertest = require('supertest');
-const mockRequest = supertest(server);
+const mockRequest = supertest(server.app);
 
 describe('Server Tests', () => {
     describe('Error Handler Tests', () => {
@@ -18,20 +18,10 @@ describe('Server Tests', () => {
         });
     });
     describe('GET routes Tests', () => {
-        test('/hello route works with no query parameter', async () => {
-            let response = await mockRequest.get('/person');
-            expect(response.status).toEqual(200);
-            expect(response.text).toEqual('Simply Hello');
-        });
-        test('/hello route works with query parameter', async () => {
+        test('/person route works with name in query string', async () => {
             let response = await mockRequest.get('/person?name=Guy');
             expect(response.status).toEqual(200);
-            expect(response.text).toEqual('Personal Greetings Guy');
-        });
-        test('/hello route works with URL/path parameter', async () => {
-            let response = await mockRequest.get('/person/Guy');
-            expect(response.status).toEqual(200);
-            expect(response.text).toEqual('Hello Guy, from us personally');
+            expect(response.body.name).toEqual("Guy");
         });
     });
 });
