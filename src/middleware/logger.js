@@ -1,7 +1,10 @@
 'use strict';
 
-function logger(req, res) {
-    console.log(`Request: ${req.method}`);
+'use strict';
+
+function logger(req, res, next) {
+  console.log(`REQUEST: ${req.method}, ${req.originalUrl}`);
+  next();
 }
 
 module.exports = logger;
